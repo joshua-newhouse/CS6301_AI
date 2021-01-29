@@ -1,5 +1,6 @@
 package edu.utdallas.cs6301.tileordering.node;
 
+import edu.utdallas.cs6301.tileordering.NodeFactory;
 import edu.utdallas.cs6301.tileordering.StateEnumerable;
 
 import java.util.ArrayList;

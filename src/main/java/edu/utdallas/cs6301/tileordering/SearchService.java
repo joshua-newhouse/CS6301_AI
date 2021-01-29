@@ -2,7 +2,6 @@ package edu.utdallas.cs6301.tileordering;
 
 import edu.utdallas.cs6301.tileordering.node.BFSNode;
 import edu.utdallas.cs6301.tileordering.node.Node;
-import edu.utdallas.cs6301.tileordering.node.NodeFactory;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package edu.utdallas.cs6301.tileordering.node;
+package edu.utdallas.cs6301.tileordering;
 
-import edu.utdallas.cs6301.tileordering.StateEnumerable;
+import edu.utdallas.cs6301.tileordering.node.Node;
 
 @FunctionalInterface
 public interface NodeFactory<T extends StateEnumerable<T>> {
