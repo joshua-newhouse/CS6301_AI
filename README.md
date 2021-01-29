@@ -1,4 +1,7 @@
 # CS6301_AI
+
+For testing run with -t followed by some valid initial state; ex: -t WBxWB
+
 ## TODO
 1. Avoid loops
 2. Implement DFSNode
