@@ -39,9 +39,9 @@ public class TileOrderingApp {
                     System.out.printf(
                             "Usage: search [OPTIONS] <INPUT_FILE>%n" +
                                     "Options:%n" +
-                                    "\t-c, --cost\tCost function type%n" +
+                                    "\t-c, --cost\tCost function type: BFS | DFS | UCS | GS | A-star%n" +
                                     "\t-h, --help\tHelp information%n" +
-                                    "\t-t, --test\tRun in testing mode%n"
+                                    "\t-t, --test <initial tile sequence> \tRun in testing mode; output to stdout%n"
                     );
                     System.exit(0);
                 case "--test":
