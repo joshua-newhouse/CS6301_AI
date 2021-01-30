@@ -4,12 +4,13 @@ import edu.utdallas.cs6301.tileordering.io.FileIOService;
 import edu.utdallas.cs6301.tileordering.io.IOService;
 import edu.utdallas.cs6301.tileordering.io.TestIOService;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TileOrderingApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Map<String, String> options = new HashMap<>();
         captureOptions(options, args);
 
@@ -58,7 +59,7 @@ public class TileOrderingApp {
         options.put("inputFile", args[args.length - 1]);
     }
 
-    private static IOService getIOService(Map<String, String> options) {
+    private static IOService getIOService(Map<String, String> options) throws IOException {
         return options.containsKey("test") ?
                 new TestIOService(options.get("test")) :
                 new FileIOService(options.get("inputFile"));
