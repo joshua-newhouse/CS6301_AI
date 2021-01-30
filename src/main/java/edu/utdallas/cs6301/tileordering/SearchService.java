@@ -11,6 +11,8 @@ public class SearchService<T extends StateEnumerable<T>> {
     private final PriorityQueue<Node<T>> queue = new PriorityQueue<>();
     private final Set<T> observedItems = new HashSet<>();
 
+    private int nodeCounter = 0;
+
     public SearchService(T initialState, T goalState, String costFunction) {
         this.nodeFactory = getNodeFactory(costFunction);
         this.goalNode = nodeFactory.getNode(null, 0, goalState);
@@ -58,7 +60,7 @@ public class SearchService<T extends StateEnumerable<T>> {
             case "A-star":
             case "BFS":
             default:
-                return BFSNode::new;
+                return (p, d, i) -> new BFSNode<>(p, d, i, nodeCounter++);
         }
     }
 }

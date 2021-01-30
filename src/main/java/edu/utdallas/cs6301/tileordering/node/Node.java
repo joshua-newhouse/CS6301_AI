@@ -11,11 +11,13 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
     private final Node<T> parent;
     private final int depth;
     private final T item;
+    private final int nodeID;
 
-    public Node(Node<T> parent, int depth, T item) {
+    public Node(Node<T> parent, int depth, T item, int ID) {
         this.parent = parent;
         this.depth = depth;
         this.item = item;
+        this.nodeID = ID;
     }
 
     public Node<T> getParent() {
@@ -28,6 +30,10 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
 
     public int getDepth() {
         return depth;
+    }
+
+    public int getNodeID() {
+        return nodeID;
     }
 
     public Collection<Node<T>> getSuccessors(NodeFactory<T> nodeFactory) {
