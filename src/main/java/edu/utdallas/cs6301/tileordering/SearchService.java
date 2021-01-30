@@ -9,6 +9,7 @@ public class SearchService<T extends StateEnumerable<T>> {
     private final Node<T> goalNode;
     private final NodeFactory<T> nodeFactory;
     private final PriorityQueue<Node<T>> queue = new PriorityQueue<>();
+    private final Set<T> observedItems = new HashSet<>();
 
     public SearchService(T initialState, T goalState, String costFunction) {
         this.nodeFactory = getNodeFactory(costFunction);
@@ -20,13 +21,19 @@ public class SearchService<T extends StateEnumerable<T>> {
 
     public List<T> getPath() {
         while(!queue.isEmpty()) {
-            Node<T> nextNode = queue.poll();
+            Node<T> currentNode = queue.poll();
 
-            if(nextNode.getItem().equals(goalNode.getItem())) {
-                return buildPathList(nextNode);
+            T currentItem = currentNode.getItem();
+            if(currentItem.equals(goalNode.getItem())) {
+                return buildPathList(currentNode);
             }
 
-            queue.addAll(nextNode.getSuccessors(nodeFactory));
+            if(observedItems.contains(currentItem)) {
+                continue;
+            }
+
+            observedItems.add(currentItem);
+            queue.addAll(currentNode.getSuccessors(nodeFactory));
         }
 
         return Collections.emptyList();
