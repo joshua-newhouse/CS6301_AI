@@ -6,9 +6,16 @@ import java.util.Objects;
 
 public class Tiles implements StateEnumerable<Tiles> {
     private final String tiles;
+    private final String operation;
+
+    public Tiles(String tiles, int indexMoved) {
+        this.tiles = tiles;
+        this.operation = "move " + indexMoved;
+    }
 
     public Tiles(String tiles) {
         this.tiles = tiles;
+        this.operation = "";
     }
 
     public List<Tiles> getNextStates() {
@@ -20,7 +27,7 @@ public class Tiles implements StateEnumerable<Tiles> {
                 continue;
             }
 
-            nextStates.add(new Tiles(swap(i, blankIdx)));
+            nextStates.add(new Tiles(swap(i, blankIdx), i));
         }
 
         return nextStates;
@@ -35,9 +42,13 @@ public class Tiles implements StateEnumerable<Tiles> {
         return new String(chars);
     }
 
+    public String getTiles() {
+        return tiles;
+    }
+
     @Override
     public String toString() {
-        return tiles;
+        return operation + " " + tiles;
     }
 
     @Override
@@ -51,7 +62,7 @@ public class Tiles implements StateEnumerable<Tiles> {
         }
 
         Tiles tiles1 = (Tiles) o;
-        return tiles.equals(tiles1.toString());
+        return tiles.equals(tiles1.getTiles());
     }
 
     @Override
