@@ -47,6 +47,11 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     @Override
+    public int getCost(Tiles parentState) {
+        return 1;
+    }
+
+    @Override
     public String toString() {
         return operation + " " + tiles;
     }

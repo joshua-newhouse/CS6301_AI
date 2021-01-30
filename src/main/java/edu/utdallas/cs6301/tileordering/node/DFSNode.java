@@ -15,7 +15,7 @@ public class DFSNode<T extends StateEnumerable<T>> extends Node<T> {
 
     @Override
     protected int computeOrder(Node<T> node) {
-        return node.getDepth() - this.getDepth();
+        return node.getCost() - this.getCost();
     }
 
     @Override

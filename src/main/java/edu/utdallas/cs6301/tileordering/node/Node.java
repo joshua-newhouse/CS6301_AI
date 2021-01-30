@@ -28,7 +28,7 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
         return item;
     }
 
-    public int getDepth() {
+    protected int getDepth() {
         return depth;
     }
 
@@ -58,5 +58,9 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
         );
 
         return successors;
+    }
+
+    protected int getCost() {
+        return depth;
     }
 }
