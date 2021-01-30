@@ -8,3 +8,4 @@ For testing run with -t followed by some valid initial state; ex: -t WBxWB
 3. Implement AStarNode
 4. Implement movement cost
 5. Try to break and fix any errors
+6. Implement max depth for DFS
