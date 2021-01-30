@@ -9,6 +9,19 @@ public class DFSNode<T extends StateEnumerable<T>> extends Node<T> {
 
     @Override
     protected int computeOrder(Node<T> node) {
-        return node.getDepth() - this.getDepth();
+        double thisDepth = (double) this.getDepth();
+        double nodeDepth = (double) node.getDepth();
+
+        double delta = (1.0 / thisDepth) - (1.0 / nodeDepth);
+
+        int retval = 0;
+
+        if (delta < 0.0) {
+            retval = -1;
+        } else if (delta > 0.0) {
+            retval = 1;
+        }
+
+        return retval;
     }
 }

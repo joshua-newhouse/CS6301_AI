@@ -1,8 +1,6 @@
 package edu.utdallas.cs6301.tileordering;
 
-import edu.utdallas.cs6301.tileordering.node.BFSNode;
-import edu.utdallas.cs6301.tileordering.node.DFSNode;
-import edu.utdallas.cs6301.tileordering.node.Node;
+import edu.utdallas.cs6301.tileordering.node.*;
 
 import java.util.*;
 
@@ -58,8 +56,11 @@ public class SearchService<T extends StateEnumerable<T>> {
             case "DFS":
                 return (p, d, i) -> new DFSNode<>(p, d, i, nodeCounter++);
             case "UCS":
+                return (p, d, i) -> new UCSNode<>(p, d, i, nodeCounter++);
             case "GS":
+                return (p, d, i) -> new GSNode<>(p, d, i, nodeCounter++);
             case "A-star":
+                return (p, d, i) -> new AStarNode<>(p, d, i, nodeCounter++);
             case "BFS":
             default:
                 return (p, d, i) -> new BFSNode<>(p, d, i, nodeCounter++);
