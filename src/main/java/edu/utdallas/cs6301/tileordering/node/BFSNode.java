@@ -8,11 +8,7 @@ public class BFSNode<T extends StateEnumerable<T>> extends Node<T> {
     }
 
     @Override
-    public int compareTo(Node<T> node) {
-        int deltaDepth = this.getDepth() - node.getDepth();
-
-        return deltaDepth != 0 ?
-                deltaDepth :
-                this.getNodeID() - node.getNodeID();
+    protected int computeOrder(Node<T> node) {
+        return this.getDepth() - node.getDepth();
     }
 }

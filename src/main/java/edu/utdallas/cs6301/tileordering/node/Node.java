@@ -36,6 +36,17 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
         return nodeID;
     }
 
+    protected abstract int computeOrder(Node<T> node);
+
+    @Override
+    public int compareTo(Node<T> node) {
+        int ordering = computeOrder(node);
+
+        return ordering != 0 ?
+                ordering :
+                this.getNodeID() - node.getNodeID();
+    }
+
     public Collection<Node<T>> getSuccessors(NodeFactory<T> nodeFactory) {
         Collection<Node<T>> successors = new ArrayList<>();
 
