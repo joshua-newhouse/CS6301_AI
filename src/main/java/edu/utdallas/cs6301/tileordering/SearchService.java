@@ -1,6 +1,7 @@
 package edu.utdallas.cs6301.tileordering;
 
 import edu.utdallas.cs6301.tileordering.node.BFSNode;
+import edu.utdallas.cs6301.tileordering.node.DFSNode;
 import edu.utdallas.cs6301.tileordering.node.Node;
 
 import java.util.*;
@@ -55,6 +56,7 @@ public class SearchService<T extends StateEnumerable<T>> {
     private NodeFactory<T> getNodeFactory(String costFunction) {
         switch(costFunction) {
             case "DFS":
+                return (p, d, i) -> new DFSNode<>(p, d, i, nodeCounter++);
             case "UCS":
             case "GS":
             case "A-star":

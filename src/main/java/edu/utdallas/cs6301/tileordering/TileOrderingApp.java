@@ -33,7 +33,7 @@ public class TileOrderingApp {
                 case "--cost":
                 case "-c":
                     options.put("cost", args[i + 1]);
-                    i += 2;
+                    i++;
                     break;
                 case "--help":
                 case "-h":
