@@ -41,15 +41,16 @@ public class TileOrderingApp {
                     System.out.printf(
                             "Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>%n" +
                                     "Options:%n" +
-                                    "\t-c, --cost\tCost function type: BFS | DFS | UCS | GS | A-star%n" +
+                                    "\t-c, --cost\tApplies movement cost.%n" +
                                     "\t-h, --help\tHelp information%n" +
-                                    "\t-t, --test <initial tile sequence> \tRun in testing mode; output to stdout%n" +
-                                    "\tSearch Strategies:%n" +
-                                    "\t\tBFS\tBreadth first search%n" +
-                                    "\t\tDFS\tDepth first search%n" +
-                                    "\t\tUCS\tUniform cost search%n" +
-                                    "\t\tBFS\tGreedy search%n" +
-                                    "\t\tA-star\tA* search%n"
+                                    "\t-t, --test <initial tile sequence> \tRun in testing mode using specified initial tile sequence%n" +
+                                    "\t\t\t\tExample: search -t WWWWWWxBBBBBB%n%n" +
+                                    "Search Strategies:%n" +
+                                    "\tBFS\t\tBreadth first search%n" +
+                                    "\tDFS\t\tDepth first search%n" +
+                                    "\tUCS\t\tUniform cost search%n" +
+                                    "\tBFS\t\tGreedy search%n" +
+                                    "\tA-star\tA* search%n"
                     );
                     System.exit(0);
                 case "--test":
