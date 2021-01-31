@@ -8,7 +8,7 @@ public class BFSNode<T extends StateEnumerable<T>> extends Node<T> {
     }
 
     @Override
-    protected int computeOrder(Node<T> node) {
-        return this.getCost() - node.getCost();
+    protected int getCost() {
+        return this.getDepth();
     }
 }

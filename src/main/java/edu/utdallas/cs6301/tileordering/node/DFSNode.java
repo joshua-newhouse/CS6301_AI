@@ -7,10 +7,15 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class DFSNode<T extends StateEnumerable<T>> extends Node<T> {
-    private static final int MAX_DEPTH = 22;
+    private static final int MAX_DEPTH = 30;
 
     public DFSNode(Node<T> parent, int depth, T item, int ID) {
         super(parent, depth, item, ID);
+    }
+
+    @Override
+    protected int getCost() {
+        return this.getDepth();
     }
 
     @Override

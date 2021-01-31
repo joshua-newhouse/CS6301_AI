@@ -12,11 +12,6 @@ public class UCSNode<T extends StateEnumerable<T>> extends Node<T> {
     }
 
     @Override
-    protected int computeOrder(Node<T> node) {
-        return this.gValue - node.getCost();
-    }
-
-    @Override
     protected int getCost() {
         return gValue;
     }

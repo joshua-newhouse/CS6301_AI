@@ -36,8 +36,6 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
         return nodeID;
     }
 
-    protected abstract int computeOrder(Node<T> node);
-
     @Override
     public int compareTo(Node<T> node) {
         int ordering = computeOrder(node);
@@ -60,7 +58,9 @@ public abstract class Node<T extends StateEnumerable<T>> implements Comparable<N
         return successors;
     }
 
-    protected int getCost() {
-        return depth;
+    protected abstract int getCost();
+
+    protected int computeOrder(Node<T> node) {
+        return this.getCost() - node.getCost();
     }
 }

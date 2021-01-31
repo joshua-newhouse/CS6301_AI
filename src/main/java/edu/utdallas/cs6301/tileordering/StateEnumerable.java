@@ -6,4 +6,6 @@ public interface StateEnumerable<T> {
     List<T> getNextStates();
 
     int getCost(T parentState);
+
+    int getDistanceFromGoal();
 }

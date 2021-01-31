@@ -8,7 +8,7 @@ public class AStarNode<T extends StateEnumerable<T>> extends Node<T> {
     }
 
     @Override
-    protected int computeOrder(Node<T> node) {
+    protected int getCost() {
         return 0;
     }
 }

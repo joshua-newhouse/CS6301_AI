@@ -8,6 +8,8 @@ public class Tiles implements StateEnumerable<Tiles> {
     private final String tiles;
     private final String operation;
 
+    private static Tiles GOAL_STATE = null;
+
     public Tiles(String tiles, int indexMoved) {
         this.tiles = tiles;
         this.operation = "move " + indexMoved;
@@ -52,6 +54,21 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     @Override
+    public int getDistanceFromGoal() {
+        char[] goal = Tiles.getGoal(this.tiles.length()).getTiles().toCharArray();
+        char[] thisTiles = getTiles().toCharArray();
+
+        int distance = 0;
+        for(int i = 0; i < goal.length; i++) {
+            if(goal[i] != thisTiles[i]) {
+                distance++;
+            }
+        }
+
+        return distance;
+    }
+
+    @Override
     public String toString() {
         return operation + " " + tiles;
     }
@@ -76,15 +93,19 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     public static Tiles getGoal(int length) {
-        char[] tileRow = new char[length];
+        if(GOAL_STATE == null) {
+            char[] tileRow = new char[length];
 
-        for(int bIdx = 0, wIdx = length - 1; bIdx < wIdx; bIdx++, wIdx--) {
-            tileRow[bIdx] = 'B';
-            tileRow[wIdx] = 'W';
+            for(int bIdx = 0, wIdx = length - 1; bIdx < wIdx; bIdx++, wIdx--) {
+                tileRow[bIdx] = 'B';
+                tileRow[wIdx] = 'W';
+            }
+
+            tileRow[length / 2] = 'x';
+
+            GOAL_STATE = new Tiles(String.valueOf(tileRow));
         }
 
-        tileRow[length / 2] = 'x';
-
-        return new Tiles(String.valueOf(tileRow));
+        return GOAL_STATE;
     }
 }
