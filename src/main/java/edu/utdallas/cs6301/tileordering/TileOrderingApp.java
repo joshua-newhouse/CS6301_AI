@@ -49,7 +49,7 @@ public class TileOrderingApp {
                                     "\tBFS\t\tBreadth first search%n" +
                                     "\tDFS\t\tDepth first search%n" +
                                     "\tUCS\t\tUniform cost search%n" +
-                                    "\tBFS\t\tGreedy search%n" +
+                                    "\tGS\t\tGreedy search%n" +
                                     "\tA-star\tA* search%n"
                     );
                     System.exit(0);
