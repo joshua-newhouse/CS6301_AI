@@ -12,8 +12,8 @@ public class SearchService<T extends StateEnumerable<T>> {
 
     private int nodeCounter = 0;
 
-    public SearchService(T initialState, T goalState, String costFunction) {
-        this.nodeFactory = getNodeFactory(costFunction);
+    public SearchService(T initialState, T goalState, String searchStrategy) {
+        this.nodeFactory = getNodeFactory(searchStrategy);
         this.goalNode = nodeFactory.getNode(null, 0, goalState);
 
         /* Add the initial node to the queue */
@@ -51,17 +51,17 @@ public class SearchService<T extends StateEnumerable<T>> {
         return pathList;
     }
 
-    private NodeFactory<T> getNodeFactory(String costFunction) {
-        switch(costFunction) {
-            case "DFS":
+    private NodeFactory<T> getNodeFactory(String searchStrategy) {
+        switch(searchStrategy) {
+            case "dfs":
                 return (p, d, i) -> new DFSNode<>(p, d, i, nodeCounter++);
-            case "UCS":
+            case "ucs":
                 return (p, d, i) -> new UCSNode<>(p, d, i, nodeCounter++);
-            case "GS":
+            case "gs":
                 return (p, d, i) -> new GSNode<>(p, d, i, nodeCounter++);
-            case "A-star":
+            case "a-star":
                 return (p, d, i) -> new AStarNode<>(p, d, i, nodeCounter++);
-            case "BFS":
+            case "bfs":
             default:
                 return (p, d, i) -> new BFSNode<>(p, d, i, nodeCounter++);
         }

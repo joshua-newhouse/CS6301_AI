@@ -20,7 +20,7 @@ public class TileOrderingApp {
         SearchService<Tiles> searchService = new SearchService<>(
                 new Tiles(input),
                 Tiles.getGoal(input.length()),
-                options.getOrDefault("cost", "BFS")
+                options.getOrDefault("searchStrategy", "bfs")
         );
 
         List<Tiles> path = searchService.getPath();
@@ -29,26 +29,40 @@ public class TileOrderingApp {
 
     private static void captureOptions(Map<String, String> options, String[] args) {
         for(int i = 0; i < args.length; i++) {
-            switch(args[i]) {
+            String cmdLineArg = args[i].toLowerCase().trim();
+
+            switch(cmdLineArg) {
                 case "--cost":
                 case "-c":
-                    options.put("cost", args[i + 1]);
-                    i++;
+                    options.put("cost", "");
                     break;
                 case "--help":
                 case "-h":
                     System.out.printf(
-                            "Usage: search [OPTIONS] <INPUT_FILE>%n" +
+                            "Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>%n" +
                                     "Options:%n" +
                                     "\t-c, --cost\tCost function type: BFS | DFS | UCS | GS | A-star%n" +
                                     "\t-h, --help\tHelp information%n" +
-                                    "\t-t, --test <initial tile sequence> \tRun in testing mode; output to stdout%n"
+                                    "\t-t, --test <initial tile sequence> \tRun in testing mode; output to stdout%n" +
+                                    "\tSearch Strategies:%n" +
+                                    "\t\tBFS\tBreadth first search%n" +
+                                    "\t\tDFS\tDepth first search%n" +
+                                    "\t\tUCS\tUniform cost search%n" +
+                                    "\t\tBFS\tGreedy search%n" +
+                                    "\t\tA-star\tA* search%n"
                     );
                     System.exit(0);
                 case "--test":
                 case "-t":
                     options.put("test", args[i + 1]);
-                    i = args.length;
+                    i++;
+                    break;
+                case "bfs":
+                case "dfs":
+                case "ucs":
+                case "gs":
+                case "a-star":
+                    options.put("searchStrategy", cmdLineArg);
                     break;
                 default:
                     System.out.printf("Unknown option: %s%n", args[i]);
