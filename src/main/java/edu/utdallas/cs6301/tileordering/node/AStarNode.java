@@ -9,7 +9,7 @@ public class AStarNode<T extends StateEnumerable<T>> extends Node<T> {
     public AStarNode(Node<T> parent, int depth, T item, int ID) {
         super(parent, depth, item, ID);
 
-        this.gValue = parent == null ? 0 : parent.getCost() + item.getCost(parent.getItem());
+        this.gValue = parent == null ? 0 : ((AStarNode<T>) parent).gValue + item.getCost(parent.getItem());
         this.hValue = item.getDistanceFromGoal();
     }
 
