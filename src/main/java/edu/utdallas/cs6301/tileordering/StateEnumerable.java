@@ -5,7 +5,7 @@ import java.util.List;
 public interface StateEnumerable<T> {
     List<T> getNextStates();
 
-    int getCost(T parentState);
+    int getCost(T previousState);
 
     int getDistanceFromGoal();
 }

@@ -1,10 +1,14 @@
-package edu.utdallas.cs6301.tileordering;
+package edu.utdallas.cs6301.tileordering.tiles;
+
+import edu.utdallas.cs6301.tileordering.StateEnumerable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Tiles implements StateEnumerable<Tiles> {
+    protected static final char BLANK_MARKER = 'x';
+
     private final String tiles;
     private final String operation;
 
@@ -21,7 +25,7 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     public List<Tiles> getNextStates() {
-        int blankIdx = tiles.indexOf('x');
+        int blankIdx = tiles.indexOf(BLANK_MARKER);
 
         List<Tiles> nextStates = new ArrayList<>();
         for(int i = 0; i < tiles.length(); i++) {
@@ -29,10 +33,18 @@ public class Tiles implements StateEnumerable<Tiles> {
                 continue;
             }
 
-            nextStates.add(new Tiles(swap(i, blankIdx), i));
+            nextStates.add(getNewTiles(swap(i, blankIdx), i));
         }
 
         return nextStates;
+    }
+
+    protected Tiles getNewTiles(String state) {
+        return new Tiles(state);
+    }
+
+    protected Tiles getNewTiles(String state, int move) {
+        return new Tiles(state, move);
     }
 
     private String swap(int idx1, int idx2) {
@@ -49,13 +61,13 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     @Override
-    public int getCost(Tiles parentState) {
+    public int getCost(Tiles previousState) {
         return 1;
     }
 
     @Override
     public int getDistanceFromGoal() {
-        char[] goal = Tiles.getGoal(this.tiles.length()).getTiles().toCharArray();
+        char[] goal = GOAL_STATE.getTiles().toCharArray();
         char[] thisTiles = getTiles().toCharArray();
 
         int distance = 0;
@@ -92,7 +104,9 @@ public class Tiles implements StateEnumerable<Tiles> {
         return Objects.hash(tiles);
     }
 
-    public static Tiles getGoal(int length) {
+    public static Tiles getGoal(Tiles initialState) {
+        int length = initialState.getTiles().length();
+
         if(GOAL_STATE == null) {
             char[] tileRow = new char[length];
 
@@ -101,9 +115,9 @@ public class Tiles implements StateEnumerable<Tiles> {
                 tileRow[wIdx] = 'W';
             }
 
-            tileRow[length / 2] = 'x';
+            tileRow[length / 2] = BLANK_MARKER;
 
-            GOAL_STATE = new Tiles(String.valueOf(tileRow));
+            GOAL_STATE = initialState.getNewTiles(String.valueOf(tileRow));
         }
 
         return GOAL_STATE;

@@ -3,6 +3,8 @@ package edu.utdallas.cs6301.tileordering;
 import edu.utdallas.cs6301.tileordering.io.FileIOService;
 import edu.utdallas.cs6301.tileordering.io.IOService;
 import edu.utdallas.cs6301.tileordering.io.TestIOService;
+import edu.utdallas.cs6301.tileordering.tiles.MovementCostTiles;
+import edu.utdallas.cs6301.tileordering.tiles.Tiles;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,9 +19,12 @@ public class TileOrderingApp {
         IOService ioService = getIOService(options);
         String input = ioService.getInputString();
 
+        Tiles initialState = options.get("cost") == null ?
+                new Tiles(input) : new MovementCostTiles(input);
+
         SearchService<Tiles> searchService = new SearchService<>(
-                new Tiles(input),
-                Tiles.getGoal(input.length()),
+                initialState,
+                Tiles.getGoal(initialState),
                 options.getOrDefault("searchStrategy", "bfs")
         );
 
