@@ -1,7 +1,15 @@
 package edu.utdallas.cs6301.tileordering.io;
 
 public interface IOService {
-    String getInputString();
+    default String getInputString() {
+        return "";
+    }
 
-    void write(String s);
+    default void write(String s) {
+
+    }
+
+    default void writeItem(String s) {
+
+    }
 }

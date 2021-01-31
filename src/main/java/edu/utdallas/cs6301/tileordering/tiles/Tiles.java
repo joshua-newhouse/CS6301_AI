@@ -82,7 +82,7 @@ public class Tiles implements StateEnumerable<Tiles> {
 
     @Override
     public String toString() {
-        return operation + " " + tiles;
+        return (operation + " " + tiles).trim();
     }
 
     @Override

@@ -25,4 +25,9 @@ public class FileIOService implements IOService {
     public void write(String s) {
         System.out.printf("Step %d: %s%n", stepCounter++, s);
     }
+
+    @Override
+    public void writeItem(String s) {
+        System.out.printf("%s%n", s);
+    }
 }

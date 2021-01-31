@@ -6,7 +6,7 @@ public class TestIOService implements IOService {
     private int stepCounter;
 
     public TestIOService(String input) {
-        testInput = input;
+        testInput = input.trim();
     }
 
     @Override
@@ -17,5 +17,10 @@ public class TestIOService implements IOService {
     @Override
     public void write(String s) {
         System.out.printf("Step %d: %s%n", stepCounter++, s);
+    }
+
+    @Override
+    public void writeItem(String s) {
+        System.out.printf("%s%n", s);
     }
 }

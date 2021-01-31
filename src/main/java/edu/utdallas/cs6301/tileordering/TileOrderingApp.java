@@ -2,6 +2,7 @@ package edu.utdallas.cs6301.tileordering;
 
 import edu.utdallas.cs6301.tileordering.io.FileIOService;
 import edu.utdallas.cs6301.tileordering.io.IOService;
+import edu.utdallas.cs6301.tileordering.io.NoOpIOService;
 import edu.utdallas.cs6301.tileordering.io.TestIOService;
 import edu.utdallas.cs6301.tileordering.tiles.MovementCostTiles;
 import edu.utdallas.cs6301.tileordering.tiles.Tiles;
@@ -25,10 +26,12 @@ public class TileOrderingApp {
         SearchService<Tiles> searchService = new SearchService<>(
                 initialState,
                 Tiles.getGoal(initialState),
-                options.getOrDefault("searchStrategy", "bfs")
+                options.getOrDefault("searchStrategy", "bfs"),
+                options.get("dump") == null ? new NoOpIOService() : ioService
         );
 
         List<Tiles> path = searchService.getPath();
+        ioService.writeItem("\n");
         path.forEach(tile -> ioService.write(tile.toString()));
     }
 
@@ -41,12 +44,17 @@ public class TileOrderingApp {
                 case "-c":
                     options.put("cost", "");
                     break;
+                case "--dump":
+                case "-d":
+                    options.put("dump", "");
+                    break;
                 case "--help":
                 case "-h":
                     System.out.printf(
                             "Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>%n" +
                                     "Options:%n" +
                                     "\t-c, --cost\tApplies movement cost.%n" +
+                                    "\t-d, --dump\tWrites every expanded tile sequence.%n" +
                                     "\t-h, --help\tHelp information%n" +
                                     "\t-t, --test <initial tile sequence> \tRun in testing mode using specified initial tile sequence%n" +
                                     "\t\t\t\tExample: search -t WWWWWWxBBBBBB%n%n" +

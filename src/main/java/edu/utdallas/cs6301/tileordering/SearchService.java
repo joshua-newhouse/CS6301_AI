@@ -1,5 +1,6 @@
 package edu.utdallas.cs6301.tileordering;
 
+import edu.utdallas.cs6301.tileordering.io.IOService;
 import edu.utdallas.cs6301.tileordering.node.*;
 
 import java.util.*;
@@ -10,10 +11,13 @@ public class SearchService<T extends StateEnumerable<T>> {
     private final PriorityQueue<Node<T>> queue = new PriorityQueue<>();
     private final Set<T> observedItems = new HashSet<>();
 
+    private final IOService ioService;
+
     private int nodeCounter = 0;
 
-    public SearchService(T initialState, T goalState, String searchStrategy) {
+    public SearchService(T initialState, T goalState, String searchStrategy, IOService ioService) {
         this.nodeFactory = getNodeFactory(searchStrategy);
+        this.ioService = ioService;
         this.goalNode = nodeFactory.getNode(null, 0, goalState);
 
         /* Add the initial node to the queue */
@@ -25,6 +29,8 @@ public class SearchService<T extends StateEnumerable<T>> {
             Node<T> currentNode = queue.poll();
 
             T currentItem = currentNode.getItem();
+            ioService.writeItem(currentItem.toString());
+
             if(currentItem.equals(goalNode.getItem())) {
                 return buildPathList(currentNode);
             }
