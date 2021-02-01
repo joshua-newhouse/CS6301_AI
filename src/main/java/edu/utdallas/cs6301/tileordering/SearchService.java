@@ -38,10 +38,9 @@ public class SearchService<T extends StateEnumerable<T>> {
 
             if(currentItem.equals(goalNode.getItem())) {
                 return buildPathList(currentNode);
-            } else {
-                expandedItems.add(currentItem);
             }
 
+            expandedItems.add(currentItem);
             queue.addAll(currentNode.getSuccessors(nodeFactory));
         }
 
