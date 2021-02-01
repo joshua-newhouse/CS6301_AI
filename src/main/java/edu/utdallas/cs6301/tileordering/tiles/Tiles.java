@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Tiles implements StateEnumerable<Tiles> {
-    protected static final char BLANK_MARKER = 'x';
+    protected static final char BLANK_TILE = 'x';
+    protected static final char BLACK_TILE = 'B';
+    protected static final char WHITE_TILE = 'W';
 
     private final String tiles;
     private final String operation;
@@ -25,7 +27,7 @@ public class Tiles implements StateEnumerable<Tiles> {
     }
 
     public List<Tiles> getNextStates() {
-        int blankIdx = tiles.indexOf(BLANK_MARKER);
+        int blankIdx = tiles.indexOf(BLANK_TILE);
 
         List<Tiles> nextStates = new ArrayList<>();
         for(int i = 0; i < tiles.length(); i++) {
@@ -72,6 +74,10 @@ public class Tiles implements StateEnumerable<Tiles> {
 
         int distance = 0;
         for(int i = 0; i < goal.length; i++) {
+            if(thisTiles[i] == BLANK_TILE) {
+                continue;
+            }
+
             if(goal[i] != thisTiles[i]) {
                 distance++;
             }
@@ -111,11 +117,11 @@ public class Tiles implements StateEnumerable<Tiles> {
             char[] tileRow = new char[length];
 
             for(int bIdx = 0, wIdx = length - 1; bIdx < wIdx; bIdx++, wIdx--) {
-                tileRow[bIdx] = 'B';
-                tileRow[wIdx] = 'W';
+                tileRow[bIdx] = BLACK_TILE;
+                tileRow[wIdx] = WHITE_TILE;
             }
 
-            tileRow[length / 2] = BLANK_MARKER;
+            tileRow[length / 2] = BLANK_TILE;
 
             GOAL_STATE = initialState.getNewTiles(String.valueOf(tileRow));
         }
