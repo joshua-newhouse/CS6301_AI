@@ -4,13 +4,12 @@ import edu.utdallas.cs6301.tileordering.io.IOService;
 import edu.utdallas.cs6301.tileordering.node.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SearchService<T extends StateEnumerable<T>> {
     private final Node<T> goalNode;
     private final NodeFactory<T> nodeFactory;
     private final PriorityQueue<Node<T>> queue = new PriorityQueue<>();
-    private final Set<T> queuedItems = new HashSet<>();
+    private final Set<T> expandedItems = new HashSet<>();
 
     private final IOService ioService;
 
@@ -23,7 +22,6 @@ public class SearchService<T extends StateEnumerable<T>> {
 
         /* Add the initial node to the queue */
         queue.add(nodeFactory.getNode(null, 0, initialState));
-        queuedItems.add(initialState);
     }
 
     public List<T> getPath() {
@@ -31,19 +29,20 @@ public class SearchService<T extends StateEnumerable<T>> {
             Node<T> currentNode = queue.poll();
 
             T currentItem = currentNode.getItem();
+
+            if(expandedItems.contains(currentItem)) {
+                continue;
+            }
+
             ioService.writeItem(currentItem.toString());
 
             if(currentItem.equals(goalNode.getItem())) {
                 return buildPathList(currentNode);
+            } else {
+                expandedItems.add(currentItem);
             }
 
-            queue.addAll(
-                    currentNode.getSuccessors(nodeFactory).stream()
-                            .filter(n -> !queuedItems.contains(n.getItem()))
-                            .collect(Collectors.toSet())
-            );
-
-            queuedItems.addAll(queue.stream().map(Node::getItem).collect(Collectors.toSet()));
+            queue.addAll(currentNode.getSuccessors(nodeFactory));
         }
 
         return Collections.emptyList();

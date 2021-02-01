@@ -56,6 +56,6 @@ public class MovementCostTiles extends Tiles {
 
     @Override
     public String toString() {
-        return super.toString() + " " + cost;
+        return (super.toString() + " " + cost).trim();
     }
 }
