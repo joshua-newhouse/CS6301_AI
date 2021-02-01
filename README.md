@@ -34,16 +34,16 @@ For example:
 ```
 Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>
 Options:
-	-c, --cost	Applies movement cost.
-	-d, --dump	Suppresses writing every expanded tile sequence.
-	-h, --help	Help information
-	-t, --test <initial tile sequence> 	Run in testing mode using specified initial tile sequence
-				Example: search -t WWWWWWxBBBBBB
+        -c, --cost      Applies movement cost.
+        -d, --dump      Suppresses writing every expanded tile sequence.
+        -h, --help      Help information
+        -t, --test      Supply an initial tile sequence string on command line instead of reading from a file.
+                        Example: search -t WWWWWWxBBBBBB
 
 Search Strategies:
-	BFS		Breadth first search
-	DFS		Depth first search
-	UCS		Uniform cost search
-	GS		Greedy search
-	A-star	A* search
+        BFS     Breadth first search
+        DFS     Depth first search
+        UCS     Uniform cost search
+        GS      Greedy search
+        A-star  A* search
 ```

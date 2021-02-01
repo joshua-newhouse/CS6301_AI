@@ -48,7 +48,7 @@ public class TileOrderingApp {
         options.put("dump", "");
         options.put("inputFile", args[args.length - 1]);
 
-        for(int i = 0; i < args.length - 1; i++) {
+        for(int i = 0; i < args.length; i++) {
             String cmdLineArg = args[i].toLowerCase().trim();
 
             switch(cmdLineArg) {
@@ -92,7 +92,6 @@ public class TileOrderingApp {
                     options.put("searchStrategy", cmdLineArg);
                     break;
                 default:
-                    System.out.printf("Unknown option: %s%n", args[i]);
                     break;
             }
         }
