@@ -28,11 +28,11 @@ public class FileIOService implements IOService {
 
     @Override
     public void write(String s) {
-        System.out.printf("Step %d: %s%n", stepCounter++, s);
+        System.out.printf("Step %d: %s%n", stepCounter++, s.trim());
     }
 
     @Override
     public void writeItem(String s) {
-        System.out.printf("%s%n", s);
+        System.out.printf("%s%n", s.trim());
     }
 }

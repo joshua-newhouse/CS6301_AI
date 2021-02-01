@@ -28,19 +28,25 @@ public class TileOrderingApp {
         Tiles initialState = options.get("cost") == null ?
                 new Tiles(input) : new MovementCostTiles(input);
 
+        String searchStrategy = options.getOrDefault("searchStrategy", "bfs");
+
         SearchService<Tiles> searchService = new SearchService<>(
                 initialState,
                 Tiles.getGoal(initialState),
-                options.getOrDefault("searchStrategy", "bfs"),
+                searchStrategy,
                 options.get("dump") == null ? new NoOpIOService() : ioService
         );
 
         List<Tiles> path = searchService.getPath();
         ioService.writeItem("\n");
+
+        ioService.writeItem(String.format("Final Result for %s:", searchStrategy.toUpperCase()));
         path.forEach(tile -> ioService.write(tile.toString()));
     }
 
     private static void captureOptions(Map<String, String> options, String[] args) {
+        options.put("dump", "");
+
         for(int i = 0; i < args.length; i++) {
             String cmdLineArg = args[i].toLowerCase().trim();
 
@@ -51,7 +57,7 @@ public class TileOrderingApp {
                     break;
                 case "--dump":
                 case "-d":
-                    options.put("dump", "");
+                    options.remove("dump");
                     break;
                 case "--help":
                 case "-h":
@@ -59,7 +65,7 @@ public class TileOrderingApp {
                             "Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>%n" +
                                     "Options:%n" +
                                     "\t-c, --cost\tApplies movement cost.%n" +
-                                    "\t-d, --dump\tWrites every expanded tile sequence.%n" +
+                                    "\t-d, --dump\tSuppresses writing every expanded tile sequence.%n" +
                                     "\t-h, --help\tHelp information%n" +
                                     "\t-t, --test <initial tile sequence> \tRun in testing mode using specified initial tile sequence%n" +
                                     "\t\t\t\tExample: search -t WWWWWWxBBBBBB%n%n" +
