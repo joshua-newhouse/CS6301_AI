@@ -1,3 +1,4 @@
+# Joshua Newhouse and Vamsi Somepalli
 # CS6301_AI
 
 For testing run with -t followed by some valid initial state; ex: -t WBxWB

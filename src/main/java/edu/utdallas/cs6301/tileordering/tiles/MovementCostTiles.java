@@ -1,3 +1,8 @@
+/*
+ * Joshua Newhouse
+ * Vamsi Somepalli
+ */
+
 package edu.utdallas.cs6301.tileordering.tiles;
 
 public class MovementCostTiles extends Tiles {
