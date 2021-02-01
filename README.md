@@ -16,16 +16,20 @@ This is a Maven project and so to build it, from the top level directory, execut
 
 ```$ mvn clean package```
 
-The program will be a Java jar archive called tile-ordering-1.0-SNAPSHOT.jar located in the target directory.
+The program will be a Java jar archive called search-1.0-SNAPSHOT.jar located in the target directory.
 
 ## Run Program
-To run the java jar, on the command line and in the directory where the jar is located, execute:
+For convenience, we have provided a Bash script called search which wraps the jar.  Execute it as follows:
 
-```java -jar tile-ordering-1.0-SNAPSHOT.jar [OPTIONS] <search-strategy> <input-file-path>```
+```./search [OPTIONS] <search-strategy> <INPUT_FILE>```
+
+To run the java jar directly, on the command line and in the directory where the jar is located, execute:
+
+```java -jar search-1.0-SNAPSHOT.jar [OPTIONS] <search-strategy> <input-file-path>```
 
 For example:
 
-```java -jar tile-ordering-1.0-SNAPSHOT.jar [--cost] A-star /home/user/tile-ordering/tile1.exe```
+```java -jar search-1.0-SNAPSHOT.jar [--cost] A-star /home/user/tile-ordering/tile1.exe```
 
 ```
 Usage: search [OPTIONS] <search-strategy> <INPUT_FILE>
@@ -43,9 +47,6 @@ Search Strategies:
 	GS		Greedy search
 	A-star	A* search
 ```
-For convenience, we have provided a Bash script called search.sh which wraps the jar.  Execute it as follows:
-
-```./search.sh [OPTIONS] <search-strategy> <INPUT_FILE>```
 
 ## TODO
 1. Try to break program and fix any errors

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#
+# Joshua Newhouse
+# Vamsi Somepalli
+#
+
+function Main() {
+    java -jar target/search-1.0-SNAPSHOT.jar "$@"
+    return $?
+}
+
+Main "$@"
+exit $?

@@ -46,8 +46,9 @@ public class TileOrderingApp {
 
     private static void captureOptions(Map<String, String> options, String[] args) {
         options.put("dump", "");
+        options.put("inputFile", args[args.length - 1]);
 
-        for(int i = 0; i < args.length; i++) {
+        for(int i = 0; i < args.length - 1; i++) {
             String cmdLineArg = args[i].toLowerCase().trim();
 
             switch(cmdLineArg) {
@@ -67,13 +68,14 @@ public class TileOrderingApp {
                                     "\t-c, --cost\tApplies movement cost.%n" +
                                     "\t-d, --dump\tSuppresses writing every expanded tile sequence.%n" +
                                     "\t-h, --help\tHelp information%n" +
-                                    "\t-t, --test <initial tile sequence> \tRun in testing mode using specified initial tile sequence%n" +
-                                    "\t\t\t\tExample: search -t WWWWWWxBBBBBB%n%n" +
+                                    "\t-t, --test\tSupply an initial tile sequence string on command line instead " +
+                                    "of reading from a file.%n" +
+                                    "\t\t\tExample: search -t WWWWWWxBBBBBB%n%n" +
                                     "Search Strategies:%n" +
-                                    "\tBFS\t\tBreadth first search%n" +
-                                    "\tDFS\t\tDepth first search%n" +
-                                    "\tUCS\t\tUniform cost search%n" +
-                                    "\tGS\t\tGreedy search%n" +
+                                    "\tBFS\tBreadth first search%n" +
+                                    "\tDFS\tDepth first search%n" +
+                                    "\tUCS\tUniform cost search%n" +
+                                    "\tGS\tGreedy search%n" +
                                     "\tA-star\tA* search%n"
                     );
                     System.exit(0);
@@ -94,8 +96,6 @@ public class TileOrderingApp {
                     break;
             }
         }
-
-        options.put("inputFile", args[args.length - 1]);
     }
 
     private static IOService getIOService(Map<String, String> options) throws IOException {
