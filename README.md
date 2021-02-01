@@ -47,7 +47,3 @@ Search Strategies:
 	GS		Greedy search
 	A-star	A* search
 ```
-
-## TODO
-1. Try to break program and fix any errors
-2. Provide script to run the jar and call it search
